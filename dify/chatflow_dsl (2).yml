@@ -1,0 +1,1018 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 电商回复助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.21@5873fe73395aeb49ba26035059eb4e0ec5af01bb66d0545b031f8917b12e8c29
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.38@ca9061ef57de857275f81bedffb4092a09d26749d8205754a4cd4e0e4943181f
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 15
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 你好，我是NovaTech官方客服，有什么可以帮您？
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1788948912074-source-1788948923718-target
+      selected: false
+      source: '1788948912074'
+      sourceHandle: source
+      target: '1788948923718'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1788948923718-1-1788948961861-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1'
+      target: '1788948961861'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1788948923718-1788949278572-1788949308015-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1788949278572'
+      target: '1788949308015'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1788948923718-1788949851515-1788949308015-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1788949851515'
+      target: '1788949308015'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1788948923718-1788956740887-1788949308015-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1788956740887'
+      target: '1788949308015'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1788948923718-1788956759372-1788967289483-target
+      source: '1788948923718'
+      sourceHandle: '1788956759372'
+      target: '1788967289483'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1788948923718-1788956773486-1788957758036-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1788956773486'
+      target: '1788957758036'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: parameter-extractor
+      id: 1788948923718-1789041882751-1789044514222-target
+      selected: false
+      source: '1788948923718'
+      sourceHandle: '1789041882751'
+      target: '1789044514222'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: parameter-extractor
+      id: 1788948923718-1789041930249-1789112697777-target
+      source: '1788948923718'
+      sourceHandle: '1789041930249'
+      target: '1789112697777'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1788948961861-source-1788948975036-target
+      selected: false
+      source: '1788948961861'
+      sourceHandle: source
+      target: '1788948975036'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1788948975036-source-1788949064019-target
+      selected: false
+      source: '1788948975036'
+      sourceHandle: source
+      target: '1788949064019'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1788949308015-source-1788949351924-target
+      selected: false
+      source: '1788949308015'
+      sourceHandle: source
+      target: '1788949351924'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1788949351924-source-1788949421592-target
+      selected: false
+      source: '1788949351924'
+      sourceHandle: source
+      target: '1788949421592'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1789041960263-source-1789111725431-target
+      selected: false
+      source: '1789041960263'
+      sourceHandle: source
+      target: '1789111725431'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1789042094370-source-1789112918144-target
+      source: '1789042094370'
+      sourceHandle: source
+      target: '1789112918144'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: parameter-extractor
+        targetType: http-request
+      id: 1789044514222-source-1789041960263-target
+      selected: false
+      source: '1789044514222'
+      sourceHandle: source
+      target: '1789041960263'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1789111725431-source-1789111787890-target
+      selected: false
+      source: '1789111725431'
+      sourceHandle: source
+      target: '1789111787890'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: parameter-extractor
+        targetType: http-request
+      id: 1789112697777-source-1789042094370-target
+      source: '1789112697777'
+      sourceHandle: source
+      target: '1789042094370'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1789112918144-source-1789112956042-target
+      source: '1789112918144'
+      sourceHandle: source
+      target: '1789112956042'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 72
+      id: '1788948912074'
+      position:
+        x: 0
+        y: 308.13578431372537
+      positionAbsolute:
+        x: 0
+        y: 308.13578431372537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        classes:
+        - id: '1'
+          label: product_query
+          name: 产品参数/价格/对比
+        - id: '1788949278572'
+          label: after_sales
+          name: 退换货/保修/碎屏险
+        - id: '1788949851515'
+          label: logistics
+          name: 发货/快递/运费
+        - id: '1788956740887'
+          label: payment
+          name: 花呗/分期/以旧换新
+        - id: '1788956759372'
+          label: complaint
+          name: 投诉/转人工
+        - id: '1788956773486'
+          label: unrelated
+          name: 无关内容
+        - id: '1789041882751'
+          label: order_query
+          name: 我的订单到哪了/快递单号/什么时候到
+        - id: '1789041930249'
+          label: stock_query
+          name: 有货吗/库存/补货
+        instruction: '你是3C数码电商客服意图分类器。将用户问题归类为以下意图之一，只输出意图对应的英文标签，不要输出任何其他内容、解释或标点，不要输出思考过程，不要解释，直接输出标签，JSON，不要任何解释或思考过程。
+
+
+          可选标签：
+
+          product_query - 商品咨询（型号、参数、规格、价格、产品对比）
+
+          after_sales - 售后问题（退换货、保修、碎屏险、维修）
+
+          logistics - 物流配送（发货时间、快递、运费）
+
+          payment - 支付优惠（花呗、分期、以旧换新、优惠券）
+
+          complaint - 投诉、不满、要求转人工
+
+          order_query - 订单查询（我的订单到哪了、快递单号、什么时候到货、物流状态）
+
+          stock_query - 库存查询（有货吗、库存多少、什么时候补货、还有货吗）
+
+          unrelated - 无关问题
+
+
+          示例：
+
+          用户：Nova X1 Pro 电池多大 → product_query
+
+          用户：支持7天无理由退货吗 → after_sales
+
+          用户：什么时候发货 → logistics
+
+          用户：花呗分期利息怎么算 → payment
+
+          用户：转人工 → complaint
+
+          用户：我的订单NV202609080001到哪了 → order_query
+
+          用户：x1_pro有货吗 → stock_query
+
+          用户：Nova X1 256G还有货吗 → stock_query
+
+          用户：今天天气怎么样 → unrelated'
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          window:
+            enabled: true
+            size: 5
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1788948912074'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 429
+      id: '1788948923718'
+      position:
+        x: 341
+        y: 143.63578431372537
+      positionAbsolute:
+        x: 341
+        y: 143.63578431372537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - CsYNJwyD7HLOf8YnapYRsLH8vO5BYwRZUQMpay/GgiVhc8wR8ETdV4gYrUJjIOrF
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 6
+          weights: null
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1788948912074'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 89
+      id: '1788948961861'
+      position:
+        x: 703
+        y: 0
+      positionAbsolute:
+        x: 703
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1788948961861'
+          - result
+        default_value: null
+        error_strategy: null
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 42
+        model:
+          completion_params:
+            temperature: 0.2
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 9588d476-fb55-477e-ae39-22d0baa82989
+          role: system
+          text: '你是NovaTech官方客服。请严格根据以下{{#context#}}知识库内容回答用户问题。
+
+
+            重要规则：
+
+            1. 只能基于下方知识库内容回答，绝对不能使用你自己的知识编造信息
+
+            2. 如果知识库内容中没有提到用户问的产品或问题，回复："抱歉，NovaTech目前没有这款产品的相关信息，您可以查看我们的在售产品列表，或为您转接人工客服。"
+
+            3. 涉及价格、参数、天数等数字，必须原文引用知识库，不能近似或四舍五入
+
+            4. 直接回答用户问题，不要反问用户需求，不要说"请告诉我您的需求"
+
+            5. 如果用户问产品对比（如"A和B哪个好/哪个贵"），先分别列出A和B的相关参数，再给出对比结论'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1788948975036'
+      position:
+        x: 1044
+        y: 15.833333333333293
+      positionAbsolute:
+        x: 1044
+        y: 15.833333333333293
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1788948975036.text#}}'
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 101
+      id: '1788949064019'
+      position:
+        x: 1385
+        y: 23.333333333333293
+      positionAbsolute:
+        x: 1385
+        y: 23.333333333333293
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - eKS67ACU3Rv+wvm+EiKmM8erslriEIr+9EWH1DwWbnjaImlR+S14JAf3r6sZ+V0r
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 4
+          weights: null
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1788948912074'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 2
+        type: knowledge-retrieval
+      height: 89
+      id: '1788949308015'
+      position:
+        x: 703
+        y: 180.9999999999999
+      positionAbsolute:
+        x: 703
+        y: 180.9999999999999
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1788949308015'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 42
+        model:
+          completion_params:
+            temperature: 0.2
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 96aacd8c-ba7f-4921-a026-ef5347c235bf
+          role: system
+          text: '你是NovaTech售后客服。请严格根据以下知识库内容回答用户问题。
+
+
+            规则：
+
+            1. 只能基于知识库内容回答，不能编造
+
+            2. 知识库没有相关信息时回复："抱歉，这个问题我暂时无法回答，已为您转接人工客服。"
+
+            3. 涉及天数、金额等数字，必须原文引用
+
+            4. 语气友好，直接回答
+
+
+            知识库内容：
+
+            {{#context#}}'
+        selected: false
+        title: LLM 2
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1788949351924'
+      position:
+        x: 1044
+        y: 196.83333333333323
+      positionAbsolute:
+        x: 1044
+        y: 196.83333333333323
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1788949351924.text#}}}'
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 101
+      id: '1788949421592'
+      position:
+        x: 1385
+        y: 204.33333333333323
+      positionAbsolute:
+        x: 1385
+        y: 204.33333333333323
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: 无法回答您的问题
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 99
+      id: '1788957758036'
+      position:
+        x: 748.471496995312
+        y: 567.5764431486477
+      positionAbsolute:
+        x: 748.471496995312
+        y: 567.5764431486477
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '非常抱歉给您带来不好的体验，我已经为您转接人工客服。
+
+
+          人工客服工作时间：9:00-21:00
+
+          您也可以拨打客服热线：400-888-8888
+
+          或发送邮件至：support@novatech.example
+
+
+          请稍候，人工客服将尽快为您处理。'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 179
+      id: '1788967289483'
+      position:
+        x: 797.2631933681384
+        y: 338.53199378308096
+      positionAbsolute:
+        x: 797.2631933681384
+        y: 338.53199378308096
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: order_id:{{#1789044514222.order_id#}}
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.28.160.1:3000/api/logistics
+        variables: []
+      height: 136
+      id: '1789041960263'
+      position:
+        x: 1044
+        y: 885.1166666666666
+      positionAbsolute:
+        x: 1044
+        y: 885.1166666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: product_id:{{#1789112697777.product_id#}}
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求 2
+        type: http-request
+        url: http://172.28.160.1:3000/api/stock
+        variables: []
+      height: 136
+      id: '1789042094370'
+      position:
+        x: 936.3075509633611
+        y: 1051.444675347031
+      positionAbsolute:
+        x: 936.3075509633611
+        y: 1051.444675347031
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        instruction: 从用户问题中提取订单号，格式为“NV”开头后跟12位数字，例如 NV202609080001。只输出订单号本身，不要包含其他文字。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        parameters:
+        - description: ' 用户提到的订单号。格式通常为“NV”开头，后跟12位数字'
+          name: order_id
+          required: false
+          type: string
+        query:
+        - sys
+        - query
+        reasoning_mode: prompt
+        selected: false
+        title: 参数提取器
+        type: parameter-extractor
+        vision:
+          enabled: false
+      height: 87
+      id: '1789044514222'
+      position:
+        x: 703
+        y: 896.1993213570311
+      positionAbsolute:
+        x: 703
+        y: 896.1993213570311
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1789041960263'
+          - body
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 41
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: da1e2733-97d8-4227-95a4-a610bac78af2
+          role: system
+          text: '你是NovaTech客服，根据以下物流信息，简洁友好地回答用户关于订单物流的问题。
+
+
+            物流信息：
+
+            {{{#context#}}}
+
+
+            如果物流信息为空或查询失败，请告知用户未找到相关信息，建议核对订单号或联系人工客服。'
+        selected: false
+        title: LLM 3
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1789111725431'
+      position:
+        x: 1345
+        y: 885.1166666666666
+      positionAbsolute:
+        x: 1345
+        y: 885.1166666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1789111725431.text#}}}'
+        selected: false
+        title: 直接回复 6
+        type: answer
+        variables: []
+      height: 101
+      id: '1789111787890'
+      position:
+        x: 1646
+        y: 885.1166666666666
+      positionAbsolute:
+        x: 1646
+        y: 885.1166666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        instruction: 从用户问题中提取产品型号，例如“x1_pro”、“x1”、“tab_pro_12.4”。只输出型号本身，不要包含其他文字。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        parameters:
+        - description: 用户询问的产品型号，如 x1_pro、x1、tab_pro_12.4
+          name: product_id
+          required: false
+          type: string
+        query:
+        - sys
+        - query
+        reasoning_mode: prompt
+        selected: false
+        title: 参数提取器 2
+        type: parameter-extractor
+        vision:
+          enabled: false
+      height: 87
+      id: '1789112697777'
+      position:
+        x: 605.4983369108343
+        y: 1043.092534876138
+      positionAbsolute:
+        x: 605.4983369108343
+        y: 1043.092534876138
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1789042094370'
+          - body
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 127e8a13-3694-4bc9-9f6f-2b522db4555b
+          role: system
+          text: '你是NovaTech客服，根据以下库存信息回答用户关于产品库存的问题：
+
+            {{#context#}}
+
+            如果库存信息显示有货，请告知用户各版本库存情况；如果无货或查询失败，请告知用户暂时缺货，建议联系人工客服或关注补货通知。'
+        selected: false
+        title: LLM 4
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1789112918144'
+      position:
+        x: 1237.307550963361
+        y: 1051.444675347031
+      positionAbsolute:
+        x: 1237.307550963361
+        y: 1051.444675347031
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1789112918144.text#}}'
+        selected: false
+        title: 直接回复 7
+        type: answer
+        variables: []
+      height: 101
+      id: '1789112956042'
+      position:
+        x: 1538.307550963361
+        y: 1051.444675347031
+      positionAbsolute:
+        x: 1538.307550963361
+        y: 1051.444675347031
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    viewport:
+      x: -321.4593619156975
+      y: 56.35864307970064
+      zoom: 0.8705505632961257
+  rag_pipeline_variables: []
