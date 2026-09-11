@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  mock_api:
+    build: ./mock_api
+    container_name: novatech-mock-api
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3000/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
