@@ -1,0 +1,42 @@
+{
+    "x1_pro": {
+        "product_id": "x1_pro",
+        "product_name": "NovaTech X1 Pro",
+        "variants": {
+            "8+128G": {"stock": 0, "available": false},
+            "8+256G": {"stock": 12, "available": true},
+            "12+512G": {"stock": 5, "available": true}
+        }
+    },
+    "x1": {
+        "product_id": "x1",
+        "product_name": "NovaTech X1",
+        "variants": {
+            "6+128G": {"stock": 23, "available": true},
+            "8+256G": {"stock": 8, "available": true}
+        }
+    },
+    "z3": {
+        "product_id": "z3",
+        "product_name": "NovaTech Z3",
+        "variants": {
+            "6+128G": {"stock": 0, "available": false},
+            "8+256G": {"stock": 3, "available": true}
+        }
+    },
+    "watch_gt": {
+        "product_id": "watch_gt",
+        "product_name": "NovaTech Watch GT",
+        "variants": {
+            "蓝牙版": {"stock": 45, "available": true},
+            "LTE版": {"stock": 0, "available": false}
+        }
+    },
+    "buds_pro": {
+        "product_id": "buds_pro",
+        "product_name": "NovaTech Buds Pro",
+        "variants": {
+            "标配": {"stock": 67, "available": true}
+        }
+    }
+}

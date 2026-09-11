@@ -42,20 +42,26 @@
 ```
 novatech-customer-service/
 ├── README.md                    # 本文件
-├── docker-compose.yml           # 整合Dify + Mock API
+├── requirements.txt             # Python依赖（根目录）
+├── docker-compose.yml           # Mock API容器编排
 ├── .env.example                 # 环境变量模板
+├── .gitignore
 ├── mock_api/                    # Mock API服务
 │   ├── main.py                  # FastAPI入口
-│   ├── data/mock_data.py        # 模拟数据（订单、库存）
+│   ├── data/                    # JSON配置文件（改数据不动代码）
+│   │   ├── orders.json          # 订单物流数据
+│   │   ├── stocks.json          # 库存数据
+│   │   └── products.json        # 产品列表
 │   ├── requirements.txt
 │   └── Dockerfile
 ├── data/                        # 知识库数据
 │   ├── NovaTech产品手册.pdf
 │   └── 客服话术_QA.csv
-├── dify/                        # Dify工作流DSL（导出后放入）
+├── dify/                        # Dify工作流DSL（导入即用）
+│   └── chatflow_dsl.yaml
 ├── scripts/                     # 辅助脚本
 │   ├── start.bat                # Windows一键启动
-│   └── test_api.py              # API连通性测试
+│   └── test_api.py              # API连通性测试（5个用例）
 └── docs/                        # 项目文档
     ├── 01_搭建指南.md
     ├── 02_测试问题与解决办法.md
@@ -66,40 +72,56 @@ novatech-customer-service/
 
 ### 前置条件
 
-- Docker Desktop（已开启WSL2）
-- Python 3.10+（仅运行Mock API时需要）
-- Ollama（本地嵌入模型）
+| 软件 | 版本要求 | 下载地址 |
+|---|---|---|
+| Docker Desktop | 最新版 | https://www.docker.com/products/docker-desktop/ |
+| Python | 3.10+ | https://www.python.org/downloads/ |
+| Ollama | 最新版 | https://ollama.com/download |
+| Git | 最新版 | https://git-scm.com/ |
 
-### 步骤1：启动 Ollama 并拉取嵌入模型
+### 步骤1：安装 Ollama 并拉取嵌入模型
 
 ```bash
+# 安装后执行
 ollama pull bge-m3
 ```
 
 ### 步骤2：启动 Mock API
 
 ```bash
-# 方式一：Python直接运行
+# 方式一：Python直接运行（开发调试）
 cd mock_api
 pip install -r requirements.txt
 python main.py
 
-# 方式二：Docker运行（推荐）
+# 方式二：Docker运行（推荐，无需装Python）
+cd ..
 docker-compose up -d mock_api
 ```
 
 验证：浏览器访问 `http://localhost:3000/api/logistics?order_id=NV202609080001`
+能看到JSON返回就说明API正常。
+
+**修改数据**：直接编辑 `mock_api/data/` 下的 JSON 文件，改完调用 `POST http://localhost:3000/api/reload` 热加载，无需重启服务。
 
 ### 步骤3：部署 Dify
 
 ```bash
-cd /path/to/dify/docker
+# 克隆 Dify 官方仓库
+git clone https://github.com/langgenius/dify.git
+cd dify/docker
+
+# 复制环境变量模板
+cp .env.example .env
+
+# 启动 Dify
 docker compose up -d
 ```
 
 **重要**：修改 Dify 的 `.env` 文件，确保 SSRF 代理允许访问宿主机：
 
 ```env
+# 不能填 true，必须填具体 CIDR 网段，否则 Squid 会崩溃
 SSRF_PROXY_ALLOW_PRIVATE_IPS=172.28.0.0/16,127.0.0.1/32,192.168.0.0/16
 ```
 
@@ -111,16 +133,35 @@ docker compose up -d ssrf_proxy
 
 ### 步骤4：配置 Dify
 
-1. 访问 `http://localhost` 登录 Dify
-2. 导入 `dify/` 目录下的工作流 DSL（或手动按 `docs/01_搭建指南.md` 编排）
-3. 配置模型供应商：通义千问（对话+分类）、Ollama（嵌入）
-4. 上传 `data/` 目录下的知识库文件
+1. 浏览器访问 `http://localhost` → 注册/登录 Dify
+2. **导入工作流**：工作室 → 创建应用 → 导入DSL → 选择 `dify/chatflow_dsl.yaml`
+3. **配置模型供应商**（设置 → 模型供应商）：
+   - 通义千问：填入 API Key（https://dashscope.console.aliyun.com/ 获取）
+   - Ollama：地址填 `http://host.docker.internal:11434`
+4. **上传知识库**（知识库 → 创建）：
+   - 库1「产品参数」：上传 `data/NovaTech产品手册.pdf`，分段512，重叠64
+   - 库2「客服话术」：上传 `data/客服话术_QA.csv`，分段256
+   - 检索方式均选「混合检索」，score_threshold=0.5
+5. 在工作流中绑定知识库到对应检索节点
+6. 点击「发布」→ 获取访问链接
 
-### 步骤5：测试
+### 步骤5：验证测试
 
 ```bash
+# 测试 Mock API 连通性
 python scripts/test_api.py
 ```
+
+5个用例全部通过即说明环境正常。
+
+### 数据修改说明
+
+| 要改什么 | 改哪个文件 | 怎么生效 |
+|---|---|---|
+| 订单物流数据 | `mock_api/data/orders.json` | 调用 `POST /api/reload` |
+| 库存数据 | `mock_api/data/stocks.json` | 调用 `POST /api/reload` |
+| 产品列表 | `mock_api/data/products.json` | 调用 `POST /api/reload` |
+| 知识库内容 | 在Dify知识库页面上传新文件 | 自动生效 |
 
 ## 关键指标
 

@@ -6,14 +6,38 @@ NovaTech 3C电商智能客服 — Mock API
     pip install -r requirements.txt
     python main.py
     # 服务运行在 http://localhost:3000
+
+数据配置：
+    修改 data/ 目录下的 JSON 文件即可更新订单和库存数据，无需改代码
 """
+
+import json
+import os
+from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from data.mock_data import ORDERS, STOCKS, PRODUCTS
+# ==================== 数据加载 ====================
+# 从 JSON 配置文件读取数据，改数据不需要动代码
+DATA_DIR = Path(__file__).parent / "data"
 
+
+def load_json(filename: str):
+    """加载 JSON 配置文件"""
+    filepath = DATA_DIR / filename
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+# 启动时加载一次，运行期间常驻内存
+ORDERS = load_json("orders.json")
+STOCKS = load_json("stocks.json")
+PRODUCTS = load_json("products.json")
+
+
+# ==================== FastAPI 应用 ====================
 app = FastAPI(title="NovaTech Mock API", version="1.0.0")
 
 app.add_middleware(
@@ -74,6 +98,21 @@ def list_products():
     return {"products": PRODUCTS}
 
 
+@app.post("/api/reload", tags=["数据管理"])
+def reload_data():
+    """重新加载 JSON 配置文件（修改数据后无需重启服务）"""
+    global ORDERS, STOCKS, PRODUCTS
+    ORDERS = load_json("orders.json")
+    STOCKS = load_json("stocks.json")
+    PRODUCTS = load_json("products.json")
+    return {
+        "message": "数据已重新加载",
+        "orders_count": len(ORDERS),
+        "stocks_count": len(STOCKS),
+        "products_count": len(PRODUCTS),
+    }
+
+
 if __name__ == "__main__":
     print("=" * 55)
     print("  NovaTech Mock API 启动中...")
@@ -81,5 +120,7 @@ if __name__ == "__main__":
     print("    物流查询：http://localhost:3000/api/logistics?order_id=NV202609080001")
     print("    库存查询：http://localhost:3000/api/stock?product_id=x1_pro")
     print("    产品列表：http://localhost:3000/api/products")
+    print("    重新加载：POST http://localhost:3000/api/reload")
+    print("  数据配置：修改 data/ 目录下的 JSON 文件")
     print("=" * 55)
     uvicorn.run(app, host="0.0.0.0", port=3000)
