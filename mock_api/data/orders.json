@@ -4,7 +4,9 @@
         "product": "NovaTech X1 Pro",
         "storage": "12+512G",
         "express": "顺丰速运",
+        "express_code": "shunfeng",
         "tracking_no": "SF1234567890",
+        "phone": "13800138000",
         "status": "运输中",
         "current_location": "深圳转运中心",
         "estimated_arrival": "2026-09-10"
@@ -14,7 +16,9 @@
         "product": "NovaTech X1",
         "storage": "8+256G",
         "express": "京东物流",
+        "express_code": "jd",
         "tracking_no": "JD0987654321",
+        "phone": "13800138000",
         "status": "已发货",
         "current_location": "上海分拨中心",
         "estimated_arrival": "2026-09-09"
@@ -24,7 +28,9 @@
         "product": "NovaTech Watch GT",
         "storage": "蓝牙版",
         "express": "中通快递",
+        "express_code": "zhongtong",
         "tracking_no": "ZT5678901234",
+        "phone": "",
         "status": "已签收",
         "current_location": "北京朝阳区",
         "estimated_arrival": "2026-09-07"
@@ -34,19 +40,23 @@
         "product": "NovaTech Buds Pro",
         "storage": "标配",
         "express": "圆通速递",
+        "express_code": "yuantong",
         "tracking_no": "YT1357902468",
+        "phone": "",
         "status": "运输中",
         "current_location": "杭州转运中心",
         "estimated_arrival": "2026-09-10"
     },
-    "NV202609080005": {
-        "order_id": "NV202609080005",
+    "260814-341384926750360": {
+        "order_id": "260814-341384926750360",
         "product": "NovaTech Z3",
         "storage": "6+128G",
-        "express": "顺丰速运",
-        "tracking_no": "SF2468013579",
+        "express": "申通快递",
+        "express_code": "申通",
+        "tracking_no": "777436164606976",
+        "phone": "15656057956",
         "status": "待发货",
         "current_location": "仓库准备中",
-        "estimated_arrival": "2026-09-11"
+        "estimated_arrival": "2026-09-12"
     }
 }

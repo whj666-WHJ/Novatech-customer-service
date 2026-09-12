@@ -1,5 +1,7 @@
 # NovaTech 智能客服 — Python 依赖
-# 运行 Mock API：pip install -r requirements.txt
+# 运行 API 服务：pip install -r requirements.txt
 
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+httpx>=0.25.0
+python-dotenv>=1.0.0

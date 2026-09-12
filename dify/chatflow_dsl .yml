@@ -144,6 +144,7 @@ workflow:
         sourceType: question-classifier
         targetType: answer
       id: 1788948923718-1788956759372-1788967289483-target
+      selected: false
       source: '1788948923718'
       sourceHandle: '1788956759372'
       target: '1788967289483'
@@ -182,6 +183,7 @@ workflow:
         sourceType: question-classifier
         targetType: parameter-extractor
       id: 1788948923718-1789041930249-1789112697777-target
+      selected: false
       source: '1788948923718'
       sourceHandle: '1789041930249'
       target: '1789112697777'
@@ -244,12 +246,11 @@ workflow:
         isInIteration: false
         isInLoop: false
         sourceType: http-request
-        targetType: llm
-      id: 1789041960263-source-1789111725431-target
-      selected: false
+        targetType: if-else
+      id: 1789041960263-source-1789227400286-target
       source: '1789041960263'
       sourceHandle: source
-      target: '1789111725431'
+      target: '1789227400286'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -259,6 +260,7 @@ workflow:
         sourceType: http-request
         targetType: llm
       id: 1789042094370-source-1789112918144-target
+      selected: false
       source: '1789042094370'
       sourceHandle: source
       target: '1789112918144'
@@ -297,6 +299,7 @@ workflow:
         sourceType: parameter-extractor
         targetType: http-request
       id: 1789112697777-source-1789042094370-target
+      selected: false
       source: '1789112697777'
       sourceHandle: source
       target: '1789042094370'
@@ -309,9 +312,34 @@ workflow:
         sourceType: llm
         targetType: answer
       id: 1789112918144-source-1789112956042-target
+      selected: false
       source: '1789112918144'
       sourceHandle: source
       target: '1789112956042'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1789227400286-false-1789111725431-target
+      source: '1789227400286'
+      sourceHandle: 'false'
+      target: '1789111725431'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1789227400286-true-1789227443629-target
+      source: '1789227400286'
+      sourceHandle: 'true'
+      target: '1789227443629'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -324,11 +352,11 @@ workflow:
       height: 72
       id: '1788948912074'
       position:
-        x: 0
-        y: 308.13578431372537
+        x: -48.245330909875406
+        y: 669.4328399058361
       positionAbsolute:
-        x: 0
-        y: 308.13578431372537
+        x: -48.245330909875406
+        y: 669.4328399058361
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -411,8 +439,7 @@ workflow:
             enabled: true
             size: 5
         model:
-          completion_params:
-            temperature: 0.7
+          completion_params: {}
           mode: chat
           name: qwen-plus
           provider: langgenius/tongyi/tongyi
@@ -427,12 +454,12 @@ workflow:
       height: 429
       id: '1788948923718'
       position:
-        x: 341
-        y: 143.63578431372537
+        x: 300.6468592201069
+        y: 443.20052544599037
       positionAbsolute:
-        x: 341
-        y: 143.63578431372537
-      selected: false
+        x: 300.6468592201069
+        y: 443.20052544599037
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -458,14 +485,14 @@ workflow:
         selected: false
         title: 知识检索
         type: knowledge-retrieval
-      height: 89
+      height: 51
       id: '1788948961861'
       position:
         x: 703
-        y: 0
+        y: 9.5
       positionAbsolute:
         x: 703
-        y: 0
+        y: 9.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -523,10 +550,10 @@ workflow:
       id: '1788948975036'
       position:
         x: 1044
-        y: 15.833333333333293
+        y: 0
       positionAbsolute:
         x: 1044
-        y: 15.833333333333293
+        y: 0
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -543,10 +570,10 @@ workflow:
       id: '1788949064019'
       position:
         x: 1385
-        y: 23.333333333333293
+        y: 7.5
       positionAbsolute:
         x: 1385
-        y: 23.333333333333293
+        y: 7.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -573,14 +600,14 @@ workflow:
         selected: false
         title: 知识检索 2
         type: knowledge-retrieval
-      height: 89
+      height: 51
       id: '1788949308015'
       position:
         x: 703
-        y: 180.9999999999999
+        y: 190.50000000000006
       positionAbsolute:
         x: 703
-        y: 180.9999999999999
+        y: 190.50000000000006
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -639,10 +666,10 @@ workflow:
       id: '1788949351924'
       position:
         x: 1044
-        y: 196.83333333333323
+        y: 181.00000000000006
       positionAbsolute:
         x: 1044
-        y: 196.83333333333323
+        y: 181.00000000000006
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -659,10 +686,10 @@ workflow:
       id: '1788949421592'
       position:
         x: 1385
-        y: 204.33333333333323
+        y: 188.50000000000006
       positionAbsolute:
         x: 1385
-        y: 204.33333333333323
+        y: 188.50000000000006
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -678,11 +705,11 @@ workflow:
       height: 99
       id: '1788957758036'
       position:
-        x: 748.471496995312
-        y: 567.5764431486477
+        x: 703
+        y: 580.5
       positionAbsolute:
-        x: 748.471496995312
-        y: 567.5764431486477
+        x: 703
+        y: 580.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -708,11 +735,11 @@ workflow:
       height: 179
       id: '1788967289483'
       position:
-        x: 797.2631933681384
-        y: 338.53199378308096
+        x: 703
+        y: 321.50000000000006
       positionAbsolute:
-        x: 797.2631933681384
-        y: 338.53199378308096
+        x: 703
+        y: 321.50000000000006
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -747,10 +774,10 @@ workflow:
       id: '1789041960263'
       position:
         x: 1044
-        y: 885.1166666666666
+        y: 749.5
       positionAbsolute:
         x: 1044
-        y: 885.1166666666666
+        y: 749.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -784,11 +811,11 @@ workflow:
       height: 136
       id: '1789042094370'
       position:
-        x: 936.3075509633611
-        y: 1051.444675347031
+        x: 1044
+        y: 1029.9
       positionAbsolute:
-        x: 936.3075509633611
-        y: 1051.444675347031
+        x: 1044
+        y: 1029.9
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -796,7 +823,7 @@ workflow:
       width: 241
       zIndex: 0
     - data:
-        instruction: 从用户问题中提取订单号，格式为“NV”开头后跟12位数字，例如 NV202609080001。只输出订单号本身，不要包含其他文字。
+        instruction: 从用户问题中提取订单号，只输出订单号本身，不要包含其他文字。
         model:
           completion_params:
             temperature: 0.7
@@ -804,7 +831,9 @@ workflow:
           name: deepseek-v4-flash
           provider: langgenius/deepseek/deepseek
         parameters:
-        - description: ' 用户提到的订单号。格式通常为“NV”开头，后跟12位数字'
+        - description: '从用户输入中提取订单号，只输出订单号本身，不要输出其他内容。
+
+            用户输入：{{#开始.用户输入#}}'
           name: order_id
           required: false
           type: string
@@ -821,10 +850,10 @@ workflow:
       id: '1789044514222'
       position:
         x: 703
-        y: 896.1993213570311
+        y: 759.5
       positionAbsolute:
         x: 703
-        y: 896.1993213570311
+        y: 759.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -857,15 +886,31 @@ workflow:
         prompt_template:
         - id: da1e2733-97d8-4227-95a4-a610bac78af2
           role: system
-          text: '你是NovaTech客服，根据以下物流信息，简洁友好地回答用户关于订单物流的问题。
+          text: '你是NovaTech客服，根据以下物流信息回答用户问题：
 
 
-            物流信息：
+            订单信息：
 
-            {{{#context#}}}
+            - 产品：{{#HTTP请求节点.body.product#}}
+
+            - 快递公司：{{#HTTP请求节点.body.express#}}
+
+            - 快递单号：{{#HTTP请求节点.body.tracking_no#}}
+
+            - 当前状态：{{#HTTP请求节点.body.status#}}
+
+            - 当前位置：{{#HTTP请求节点.body.current_location#}}
+
+            - 预计到达：{{#HTTP请求节点.body.estimated_arrival#}}
 
 
-            如果物流信息为空或查询失败，请告知用户未找到相关信息，建议核对订单号或联系人工客服。'
+            物流轨迹：
+
+            {{#HTTP请求节点.body.tracks#}}
+
+            {{#context#}}}
+
+            请根据以上信息，用简洁友好的语言回答用户关于订单物流的问题。如果轨迹为空，只回复当前状态和预计到达时间即可。'
         selected: false
         title: LLM 3
         type: llm
@@ -874,11 +919,11 @@ workflow:
       height: 87
       id: '1789111725431'
       position:
-        x: 1345
-        y: 885.1166666666666
+        x: 1746
+        y: 907.7666666666668
       positionAbsolute:
-        x: 1345
-        y: 885.1166666666666
+        x: 1746
+        y: 907.7666666666668
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -894,11 +939,11 @@ workflow:
       height: 101
       id: '1789111787890'
       position:
-        x: 1646
-        y: 885.1166666666666
+        x: 2087
+        y: 915.2666666666668
       positionAbsolute:
-        x: 1646
-        y: 885.1166666666666
+        x: 2087
+        y: 915.2666666666668
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -930,11 +975,11 @@ workflow:
       height: 87
       id: '1789112697777'
       position:
-        x: 605.4983369108343
-        y: 1043.092534876138
+        x: 703
+        y: 1039.9
       positionAbsolute:
-        x: 605.4983369108343
-        y: 1043.092534876138
+        x: 703
+        y: 1039.9
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -980,11 +1025,11 @@ workflow:
       height: 87
       id: '1789112918144'
       position:
-        x: 1237.307550963361
-        y: 1051.444675347031
+        x: 1385
+        y: 1077.0666666666666
       positionAbsolute:
-        x: 1237.307550963361
-        y: 1051.444675347031
+        x: 1385
+        y: 1077.0666666666666
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1000,11 +1045,61 @@ workflow:
       height: 101
       id: '1789112956042'
       position:
-        x: 1538.307550963361
-        y: 1051.444675347031
+        x: 1726
+        y: 1084.5666666666666
       positionAbsolute:
-        x: 1538.307550963361
-        y: 1051.444675347031
+        x: 1726
+        y: 1084.5666666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 61683f08-e804-4b0e-8835-ac0571974712
+            value: 'false'
+            varType: string
+            variable_selector:
+            - '1789041960263'
+            - body
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 123
+      id: '1789227400286'
+      position:
+        x: 1385
+        y: 778.6666666666667
+      positionAbsolute:
+        x: 1385
+        y: 778.6666666666667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: 未找到订单信息
+        selected: false
+        title: 直接回复 7
+        type: answer
+        variables: []
+      height: 99
+      id: '1789227443629'
+      position:
+        x: 1746
+        y: 728.7666666666668
+      positionAbsolute:
+        x: 1746
+        y: 728.7666666666668
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1012,7 +1107,7 @@ workflow:
       width: 241
       zIndex: 0
     viewport:
-      x: -321.4593619156975
-      y: 56.35864307970064
-      zoom: 0.8705505632961257
+      x: -39.80891685932795
+      y: 47.644288855198624
+      zoom: 0.4352752816480631
   rag_pipeline_variables: []
