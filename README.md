@@ -34,7 +34,8 @@
 | 嵌入模型 | 通义千问 text-embedding-v4 | 在线API，中文语义嵌入 |
 | 对话/分类模型 | 通义千问 qwen-plus | 在线API，意图分类+答案生成 |
 | 向量库 | Weaviate | Dify内置 |
-| Mock API | FastAPI + Python | 模拟物流/库存接口 |
+| 物流API | 快递100真实API | 实时物流轨迹查询，订单存在性前置校验 |
+| 库存API | FastAPI + Python | 模拟ERP库存系统 |
 | 部署 | Docker + Docker Compose | 一键启动 |
 
 ## 目录结构
@@ -46,10 +47,10 @@ novatech-customer-service/
 ├── docker-compose.yml           # Mock API容器编排
 ├── .env.example                 # 环境变量模板
 ├── .gitignore
-├── mock_api/                    # Mock API服务
-│   ├── main.py                  # FastAPI入口
+├── mock_api/                    # API服务（物流对接快递100 + 本地库存）
+│   ├── main.py                  # FastAPI入口（快递100签名+订单校验）
 │   ├── data/                    # JSON配置文件（改数据不动代码）
-│   │   ├── orders.json          # 订单物流数据
+│   │   ├── orders.json          # 订单数据（含快递单号）
 │   │   ├── stocks.json          # 库存数据
 │   │   └── products.json        # 产品列表
 │   ├── requirements.txt
@@ -82,7 +83,18 @@ novatech-customer-service/
 
 > 不需要安装 Ollama，嵌入模型和对话模型均使用通义千问在线API。
 
-### 步骤1：启动 Mock API
+### 步骤1：启动 API 服务
+
+**配置快递100 API Key**（可选，不配置则物流查询回退到本地缓存）：
+
+1. 注册 [快递100](https://www.kuaidi100.com) 账号 → 开放平台获取 `customer` 和 `key`
+2. 在项目根目录创建 `.env` 文件：
+   ```env
+   KUAIDI100_CUSTOMER=你的customer
+   KUAIDI100_KEY=你的key
+   ```
+
+**启动服务**：
 
 ```bash
 # 方式一：Python直接运行（开发调试）
@@ -97,6 +109,8 @@ docker-compose up -d mock_api
 
 验证：浏览器访问 `http://localhost:3000/api/logistics?order_id=NV202609080001`
 能看到JSON返回就说明API正常。
+
+**订单存在性前置校验**：物流查询接口会先校验订单号是否存在于本地系统，不存在则直接返回，不调用快递100 API（降低调用成本 + 防止恶意请求）。
 
 **修改数据**：直接编辑 `mock_api/data/` 下的 JSON 文件，改完调用 `POST http://localhost:3000/api/reload` 热加载，无需重启服务。
 
@@ -174,12 +188,12 @@ python scripts/test_api.py
 | 客户满意度 | 4.3/5.0 | 模拟用户主观评分（5分制） |
 | 平均响应时间 | 2.3s | Web前端实测，含网络传输 |
 
-## Mock API 接口
+## API 接口
 
 | 接口 | 方法 | 参数 | 说明 |
 |---|---|---|---|
-| `/api/logistics` | GET | `order_id` | 查询订单物流 |
-| `/api/stock` | GET | `product_id` | 查询产品库存 |
+| `/api/logistics` | GET | `order_id` | 物流查询：先校验订单存在性，再调用快递100真实API获取实时轨迹 |
+| `/api/stock` | GET | `product_id` | 库存查询：本地模拟ERP库存数据 |
 | `/api/products` | GET | 无 | 产品列表 |
 | `/api/reload` | POST | 无 | 热加载JSON数据，改数据不重启 |
 
